@@ -1,41 +1,122 @@
-card.innerHTML = `
-<div class="product-card">
+const produtosContainer = document.getElementById("produtos");
+const pesquisa = document.getElementById("pesquisa");
 
-    <div class="product-image">
-        <img
-            src="${produto.img || 'https://via.placeholder.com/300x300?text=Sem+Imagem'}"
-            alt="${produto.descricao}"
-            onerror="this.src='https://via.placeholder.com/300x300?text=Sem+Imagem'">
-    </div>
+let produtos = [];
+let produtosFiltrados = [];
 
-    <div class="product-info">
+async function carregarProdutos() {
+    try {
+        const resposta = await fetch("produtos.json");
 
-        <div class="product-code">
-            Código: ${produto.codigo}
-        </div>
+        if (!resposta.ok) {
+            throw new Error("Erro ao carregar produtos.json");
+        }
 
-        <div class="product-title">
-            ${produto.descricao}
-        </div>
+        produtos = await resposta.json();
+        produtosFiltrados = produtos;
 
-        <div class="product-buttons">
+        renderizarProdutos(produtosFiltrados);
 
-            <a
-                href="produto.html?id=${produto.codigo}"
-                class="btn-produto btn-ver">
-                Ver Produto
-            </a>
+    } catch (erro) {
+        console.error("Erro ao carregar produtos:", erro);
 
-            <a
-                href="https://wa.me/5547999999999?text=Olá, gostaria de informações sobre o produto ${produto.codigo}"
-                target="_blank"
-                class="btn-produto btn-whats">
-                WhatsApp
-            </a>
+        if (produtosContainer) {
+            produtosContainer.innerHTML = `
+                <div style="text-align:center;padding:30px;">
+                    <h3>Erro ao carregar os produtos.</h3>
+                </div>
+            `;
+        }
+    }
+}
 
-        </div>
+function renderizarProdutos(lista) {
 
-    </div>
+    produtosContainer.innerHTML = "";
 
-</div>
-`;
+    if (lista.length === 0) {
+        produtosContainer.innerHTML = `
+            <div style="text-align:center;padding:30px;">
+                <h3>Nenhum produto encontrado.</h3>
+            </div>
+        `;
+        return;
+    }
+
+    lista.forEach(produto => {
+
+        const card = document.createElement("div");
+        card.className = "col-lg-4 col-md-6";
+
+        card.innerHTML = `
+            <div class="product-card">
+
+                <div class="product-image">
+
+                    <img
+                        src="${produto.img || 'https://via.placeholder.com/300x300?text=Sem+Imagem'}"
+                        alt="${produto.descricao}"
+                        onerror="this.src='https://via.placeholder.com/300x300?text=Sem+Imagem'">
+
+                </div>
+
+                <div class="product-info">
+
+                    <div class="product-code">
+                        Código: ${produto.codigo}
+                    </div>
+
+                    <div class="product-title">
+                        ${produto.descricao}
+                    </div>
+
+                    <div class="product-buttons">
+
+                        <a
+                            href="produto.html?id=${produto.codigo}"
+                            class="btn-produto btn-ver">
+                            Ver Produto
+                        </a>
+
+                        <a
+                            href="https://wa.me/5547999999999?text=Olá, gostaria de informações sobre o produto ${produto.codigo}"
+                            target="_blank"
+                            class="btn-produto btn-whats">
+                            WhatsApp
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        `;
+
+        produtosContainer.appendChild(card);
+
+    });
+
+}
+
+if (pesquisa) {
+
+    pesquisa.addEventListener("input", () => {
+
+        const texto = pesquisa.value.toLowerCase();
+
+        produtosFiltrados = produtos.filter(produto => {
+
+            return (
+                produto.descricao.toLowerCase().includes(texto) ||
+                produto.codigo.toString().includes(texto)
+            );
+
+        });
+
+        renderizarProdutos(produtosFiltrados);
+
+    });
+
+}
+
+carregarProdutos();
