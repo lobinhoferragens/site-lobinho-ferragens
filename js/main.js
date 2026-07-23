@@ -6,78 +6,84 @@ let produtosFiltrados = [];
 
 async function carregarProdutos() {
 
-    try {
+    try{
 
         const resposta = await fetch("produtos.json");
-
         produtos = await resposta.json();
 
         produtosFiltrados = produtos;
 
-        renderizarProdutos(produtos);
+        renderizarProdutos(produtosFiltrados);
 
-    } catch (erro) {
+    }catch(erro){
 
         console.error("Erro ao carregar produtos:", erro);
 
     }
 
 }
-function renderizarProdutos(lista) {
+
+function renderizarProdutos(lista){
 
     produtosContainer.innerHTML = "";
 
-    lista.forEach(produto => {
+    if(lista.length === 0){
 
-        produtosContainer.innerHTML += `
+        produtosContainer.innerHTML = `
+            <div class="col-12 text-center">
+                <h4>Nenhum produto encontrado.</h4>
+            </div>
+        `;
+        return;
 
-        <div class="col-lg-4 col-md-6">
+    }
 
-            <div class="product-card">
+    lista.forEach(produto=>{
 
-                <div class="product-image">
+        const card = document.createElement("div");
 
-                    <img src="${produto.imagem}" alt="${produto.nome}">
+        card.className = "col-lg-4 col-md-6";
 
+        card.innerHTML = `
+
+        <div class="product-card">
+
+            <div class="product-image">
+
+                <img
+                src="${produto.imagem}"
+                alt="${produto.descricao}">
+
+            </div>
+
+            <div class="product-info">
+
+                <div class="product-code">
+                    Código: ${produto.codigo}
                 </div>
 
-                <div class="product-info">
+                <div class="product-title">
+                    ${produto.descricao}
+                </div>
 
-                    <div class="product-code">
-                        Código: ${produto.codigo}
-                    </div>
+                <div class="product-buttons">
 
-                    <div class="product-title">
-                        ${produto.nome}
-                    </div>
+                    <a
+                    href="produto.html?id=${produto.codigo}"
+                    class="btn-produto btn-ver">
 
-                    <div class="product-description">
-                        ${produto.descricao}
-                    </div>
+                        Ver Produto
 
-                    <div class="product-price">
-                        R$ ${produto.preco.toFixed(2).replace(".", ",")}
-                    </div>
+                    </a>
 
-                    <div class="product-buttons">
+                    <a
+                    href="https://wa.me/5547999999999?text=Olá, gostaria de informações sobre o produto ${produto.codigo}"
+                    target="_blank"
+                    class="btn-produto btn-whats">
 
-                        <button
-                            class="btn-produto btn-ver"
-                            onclick="verProduto(${produto.id})">
+                        WhatsApp
 
-                            Ver Produto
-
-                        </button>
-
-                        <button
-                            class="btn-produto btn-whats"
-                            onclick="pedirWhatsapp('${produto.nome}')">
-
-                            WhatsApp
-
-                        </button>
-
-                    </div>
+                    </a>
 
                 </div>
 
@@ -87,28 +93,25 @@ function renderizarProdutos(lista) {
 
         `;
 
+        produtosContainer.appendChild(card);
+
     });
 
 }
-function verProduto(id){
 
-    window.location.href = `produto.html?id=${id}`;
+pesquisa.addEventListener("input",()=>{
 
-}
+    const texto = pesquisa.value.toLowerCase();
 
-function pedirWhatsapp(nome){
+    produtosFiltrados = produtos.filter(produto=>{
 
-    const telefone = "5547999999999"; // <-- coloque o número da Lobinho
+        return produto.descricao.toLowerCase().includes(texto)
+        || produto.codigo.toString().includes(texto);
 
-    const mensagem =
-        encodeURIComponent(
-            `Olá! Tenho interesse no produto: ${nome}`
-        );
+    });
 
-    window.open(
-        `https://wa.me/${telefone}?text=${mensagem}`,
-        "_blank"
-    );
+    renderizarProdutos(produtosFiltrados);
 
-}
+});
+
 carregarProdutos();

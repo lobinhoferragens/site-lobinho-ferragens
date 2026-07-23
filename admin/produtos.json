@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "codigo": "LF0001",
+    "nome": "Martelo 27 mm",
+    "categoria": "Ferramentas",
+    "descricao": "Martelo profissional com cabo em fibra.",
+    "preco": 59.90,
+    "imagem": "imagens/produtos/martelo.jpg",
+    "estoque": 15,
+    "novo": true,
+    "promocao": false
+  },
+  {
+    "id": 2,
+    "codigo": "LF0002",
+    "nome": "Chave de Fenda 1/4",
+    "categoria": "Ferramentas",
+    "descricao": "Chave de fenda com cabo anatômico.",
+    "preco": 18.50,
+    "imagem": "imagens/produtos/chave-fenda.jpg",
+    "estoque": 40,
+    "novo": false,
+    "promocao": true
+  },
+  {
+    "id": 3,
+    "codigo": "LF0003",
+    "nome": "Alicate Universal 8\"",
+    "categoria": "Ferramentas",
+    "descricao": "Alicate universal em aço cromo vanádio.",
+    "preco": 48.90,
+    "imagem": "imagens/produtos/alicate.jpg",
+    "estoque": 22,
+    "novo": false,
+    "promocao": false
+  },
+  {
+    "id": 4,
+    "codigo": "LF0004",
+    "nome": "Parafuso Sextavado",
+    "categoria": "Ferragens",
+    "descricao": "Parafuso sextavado zincado.",
+    "preco": 1.25,
+    "imagem": "imagens/produtos/parafuso.jpg",
+    "estoque": 1200,
+    "novo": false,
+    "promocao": false
+  },
+  {
+    "id": 5,
+    "codigo": "LF0005",
+    "nome": "Tomada 20A",
+    "categoria": "Elétrica",
+    "descricao": "Tomada padrão brasileiro 20 amperes.",
+    "preco": 14.90,
+    "imagem": "imagens/produtos/tomada.jpg",
+    "estoque": 65,
+    "novo": true,
+    "promocao": false
+  },
+  {
+    "id": 6,
+    "codigo": "LF0006",
+    "nome": "Registro Esfera 3/4",
+    "categoria": "Hidráulica",
+    "descricao": "Registro esfera metálico.",
+    "preco": 39.90,
+    "imagem": "imagens/produtos/registro.jpg",
+    "estoque": 18,
+    "novo": false,
+    "promocao": true
+  }
+]
