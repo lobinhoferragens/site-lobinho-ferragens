@@ -13,6 +13,9 @@ async function carregarProdutos() {
         }
 
         produtos = await resposta.json();
+
+        console.log(produtos);
+        
         produtosFiltrados = produtos;
 
         renderizarProdutos(produtosFiltrados);
