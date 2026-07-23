@@ -1,106 +1,633 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lobinho Ferragens | Garuva - SC</title>
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Lobinho Ferragens | Ferragens, Ferramentas e Utilidades</title>
+
+    <meta name="description"
+        content="Catálogo online da Lobinho Ferragens em Garuva - SC. Ferragens, ferramentas, materiais elétricos, hidráulicos, jardinagem e muito mais.">
+
+    <meta name="keywords"
+        content="ferragens, ferramentas, parafusos, elétrica, hidráulica, Garuva, Lobinho Ferragens">
+
+    <meta name="author" content="Lobinho Ferragens">
+
+    <link rel="icon" href="imagens/favicon.png">
 
     <!-- Bootstrap -->
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- CSS do projeto -->
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- CSS -->
+
     <link rel="stylesheet" href="css/style.css">
+
 </head>
 
 <body>
 
-<header>
-    <div class="logo">
-        <h1>
-            <i class="fa-solid fa-screwdriver-wrench"></i>
-            Lobinho Ferragens
-        </h1>
-    </div>
+<!-- =======================================
+TOPO
+======================================= -->
 
-    <nav>
-        <ul>
-            <li><a href="#inicio">Início</a></li>
-            <li><a href="#categorias">Categorias</a></li>
-            <li><a href="#catalogo">Catálogo</a></li>
-            <li><a href="#contato">Contato</a></li>
-        </ul>
-    </nav>
-
-    <a
-        class="cta-header"
-        target="_blank"
-        href="https://wa.me/5547999999999">
-        WhatsApp
-    </a>
-</header>
-
-<section id="inicio" class="hero">
-
-    <h2>
-        Ferragens, Ferramentas e Utilidades
-    </h2>
-
-    <p>
-        Catálogo completo de produtos Lobinho Ferragens.
-    </p>
-
-    <a href="#catalogo" class="btn-main">
-        Ver Produtos
-    </a>
-
-</section>
-
-<section id="categorias">
-
-    <h2 class="section-title">
-        Categorias
-    </h2>
-
-    <div class="categories">
-
-        <!-- categorias -->
-
-    </div>
-
-</section>
-
-<section id="catalogo">
+<div class="top-bar">
 
     <div class="container">
 
-        <h2 class="section-title">
-            Catálogo de Produtos
+        <div>
+
+            <i class="fa-solid fa-location-dot"></i>
+
+            Garuva - SC
+
+        </div>
+
+        <div>
+
+            <i class="fa-solid fa-phone"></i>
+
+            (47) 99999-9999
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- =======================================
+HEADER
+======================================= -->
+
+<header>
+
+    <div class="container">
+
+        <div class="logo">
+
+            <img src="imagens/logo.png" alt="Lobinho Ferragens">
+
+            <div>
+
+                <h1>Lobinho Ferragens</h1>
+
+                <span>Ferragens • Ferramentas • Utilidades</span>
+
+            </div>
+
+        </div>
+
+        <nav>
+
+            <ul>
+
+                <li>
+                    <a href="#inicio">Início</a>
+                </li>
+
+                <li>
+                    <a href="#categorias">Categorias</a>
+                </li>
+
+                <li>
+                    <a href="#catalogo">Catálogo</a>
+                </li>
+
+                <li>
+                    <a href="#contato">Contato</a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+        <a
+            href="https://wa.me/5547999999999"
+            target="_blank"
+            class="btn-header">
+
+            <i class="fab fa-whatsapp"></i>
+
+            WhatsApp
+
+        </a>
+
+    </div>
+
+</header>
+
+<!-- =======================================
+BANNER
+======================================= -->
+
+<section
+    id="inicio"
+    class="hero">
+
+    <div class="container">
+
+        <h2>
+
+            Tudo para sua obra,
+            reforma e manutenção.
+
         </h2>
 
-        <div class="search-box">
+        <p>
 
-            <input
-                id="pesquisa"
-                type="text"
-                placeholder="Pesquisar código ou descrição...">
+            Encontre ferramentas,
+            ferragens,
+            materiais elétricos,
+            hidráulicos
+            e muito mais.
+
+        </p>
+
+        <div class="hero-buttons">
+
+            <a
+                href="#catalogo"
+                class="btn btn-primary">
+
+                Ver Catálogo
+
+            </a>
+
+            <a
+                href="https://wa.me/5547999999999"
+                target="_blank"
+                class="btn btn-success">
+
+                Solicitar Orçamento
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =======================================
+CATEGORIAS
+======================================= -->
+
+<section
+    id="categorias"
+    class="categories">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>
+
+                Categorias
+
+            </h2>
+
+            <p>
+
+                Encontre rapidamente
+                o que procura.
+
+            </p>
+
+        </div>
+
+        <div class="category-grid">
+                    <div class="category-grid">
+
+            <div class="category-card">
+
+                <i class="fa-solid fa-screwdriver-wrench"></i>
+
+                <h3>Ferramentas</h3>
+
+                <p>
+                    Manuais, elétricas e acessórios para todos os serviços.
+                </p>
+
+            </div>
+
+            <div class="category-card">
+
+                <i class="fa-solid fa-bolt"></i>
+
+                <h3>Materiais Elétricos</h3>
+
+                <p>
+                    Cabos, tomadas, disjuntores, lâmpadas e iluminação.
+                </p>
+
+            </div>
+
+            <div class="category-card">
+
+                <i class="fa-solid fa-faucet"></i>
+
+                <h3>Hidráulica</h3>
+
+                <p>
+                    Tubos, conexões, registros e acessórios hidráulicos.
+                </p>
+
+            </div>
+
+            <div class="category-card">
+
+                <i class="fa-solid fa-hammer"></i>
+
+                <h3>Ferragens</h3>
+
+                <p>
+                    Parafusos, porcas, arruelas, buchas e fixadores.
+                </p>
+
+            </div>
+
+            <div class="category-card">
+
+                <i class="fa-solid fa-seedling"></i>
+
+                <h3>Jardinagem</h3>
+
+                <p>
+                    Mangueiras, ferramentas e acessórios para jardim.
+                </p>
+
+            </div>
+
+            <div class="category-card">
+
+                <i class="fa-solid fa-paint-roller"></i>
+
+                <h3>Pintura</h3>
+
+                <p>
+                    Rolos, pincéis, bandejas e acessórios para pintura.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =======================================
+CATÁLOGO
+======================================= -->
+
+<section
+    id="catalogo"
+    class="catalog">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>
+
+                Catálogo de Produtos
+
+            </h2>
+
+            <p>
+
+                Pesquise rapidamente pelo código
+                ou descrição do produto.
+
+            </p>
+
+        </div>
+
+        <div class="catalog-top">
+
+            <div class="search-box">
+
+                <input
+                    id="pesquisa"
+                    type="text"
+                    placeholder="Digite código ou descrição...">
+
+                <button id="btnPesquisar">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                </button>
+
+            </div>
 
         </div>
 
         <div
             id="produtos"
-            class="row g-4">
+            class="products-grid">
+
+            <!-- Produtos carregados via JavaScript -->
 
         </div>
 
         <div
             id="paginacao"
-            class="mt-5 d-flex justify-content-center">
+            class="pagination-area">
 
         </div>
 
     </div>
 
 </section>
+
+<!-- =======================================
+SOBRE
+======================================= -->
+
+<section
+    id="sobre"
+    class="about">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>
+
+                Sobre a Lobinho Ferragens
+
+            </h2>
+
+            <p>
+
+                Qualidade, confiança e atendimento especializado.
+
+            </p>
+
+        </div>
+
+        <div class="about-content">
+
+            <div class="about-text">
+
+                <p>
+
+                    A Lobinho Ferragens oferece uma ampla linha de
+                    ferramentas, ferragens, materiais elétricos,
+                    hidráulicos e utilidades para atender profissionais
+                    e consumidores.
+
+                </p>
+
+                <p>
+
+                    Nosso compromisso é oferecer produtos de qualidade,
+                    preços competitivos e atendimento diferenciado.
+
+                </p>
+
+            </div>
+
+            <div class="about-image">
+
+                <img
+                    src="imagens/loja.jpg"
+                    alt="Lobinho Ferragens">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- =======================================
+CONTATO
+======================================= -->
+
+<section
+    id="contato"
+    class="contact">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>
+
+                Entre em Contato
+
+            </h2>
+
+            <p>
+
+                Solicite um orçamento ou tire suas dúvidas.
+
+            </p>
+
+        </div>
+
+        <div class="contact-grid">
+
+            <div class="contact-card">
+
+                <i class="fa-solid fa-location-dot"></i>
+
+                <h3>Endereço</h3>
+
+                <p>
+
+                    Garuva - SC
+
+                </p>
+
+            </div>
+
+            <div class="contact-card">
+
+                <i class="fa-solid fa-phone"></i>
+
+                <h3>Telefone</h3>
+
+                <p>
+
+                    (47) 99999-9999
+
+                </p>
+
+            </div>
+
+            <div class="contact-card">
+
+                <i class="fa-brands fa-whatsapp"></i>
+
+                <h3>WhatsApp</h3>
+
+                <a
+                    href="https://wa.me/5547999999999"
+                    target="_blank">
+
+                    Conversar Agora
+
+                </a>
+
+            </div>
+
+            <div class="contact-card">
+
+                <i class="fa-solid fa-envelope"></i>
+
+                <h3>E-mail</h3>
+
+                <p>
+
+                    contato@lobinhoferragens.com.br
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =======================================
+RODAPÉ
+======================================= -->
+
+<footer>
+
+    <div class="container">
+
+        <div class="footer-content">
+
+            <div>
+
+                <h3>
+
+                    Lobinho Ferragens
+
+                </h3>
+
+                <p>
+
+                    Ferragens, ferramentas,
+                    materiais elétricos,
+                    hidráulicos e utilidades
+                    para sua obra.
+
+                </p>
+
+            </div>
+
+            <div>
+
+                <h3>
+
+                    Navegação
+
+                </h3>
+
+                <ul>
+
+                    <li>
+                        <a href="#inicio">Início</a>
+                    </li>
+
+                    <li>
+                        <a href="#categorias">Categorias</a>
+                    </li>
+
+                    <li>
+                        <a href="#catalogo">Catálogo</a>
+                    </li>
+
+                    <li>
+                        <a href="#contato">Contato</a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div>
+
+                <h3>
+
+                    Atendimento
+
+                </h3>
+
+                <p>
+
+                    Segunda a Sexta
+
+                </p>
+
+                <p>
+
+                    08:00 às 18:00
+
+                </p>
+
+                <p>
+
+                    Sábado
+
+                </p>
+
+                <p>
+
+                    08:00 às 12:00
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+
+            © 2026 Lobinho Ferragens -
+            Todos os direitos reservados.
+
+        </div>
+
+    </div>
+
+</footer>
+
+<!-- =======================================
+BOTÃO WHATSAPP
+======================================= -->
+
+<a
+    class="whatsapp-float"
+    href="https://wa.me/5547999999999"
+    target="_blank">
+
+    <i class="fab fa-whatsapp"></i>
+
+</a>
+
+<!-- =======================================
+SCRIPTS
+======================================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="js/main.js"></script>
+
+</body>
+
+</html>
