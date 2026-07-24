@@ -166,6 +166,14 @@ async function carregarProduto() {
         "produtoDetalhes"
     );
 
+    if (!container) {
+        console.error(
+            "O elemento #produtoDetalhes não foi encontrado."
+        );
+
+        return;
+    }
+
     try {
         const codigo = obterCodigoDaUrl();
 
@@ -199,7 +207,6 @@ async function carregarProduto() {
             produto,
             produtos
         );
-
     } catch (erro) {
         console.error(erro);
 
@@ -230,7 +237,12 @@ function renderizarProduto(produto) {
         "produtoDetalhes"
     );
 
+    if (!container) {
+        return;
+    }
+
     const codigo = escaparHtml(produto.codigo);
+
     const descricao = escaparHtml(
         produto.descricao || "Produto"
     );
@@ -310,10 +322,126 @@ function renderizarProduto(produto) {
                     Voltar ao catálogo
                 </a>
 
+                <button
+                    type="button"
+                    id="btnCompartilharProduto"
+                    class="product-detail-share"
+                >
+                    <i class="fa-solid fa-share-nodes"></i>
+                    Compartilhar produto
+                </button>
+
             </div>
 
         </div>
     `;
+
+    configurarCompartilhamento(produto);
+}
+
+function configurarCompartilhamento(produto) {
+    const botao = document.getElementById(
+        "btnCompartilharProduto"
+    );
+
+    if (!botao) {
+        return;
+    }
+
+    botao.addEventListener("click", async () => {
+        const titulo =
+            produto.descricao || "Produto";
+
+        const texto =
+            `Confira este produto na Lobinho Ferragens: ${titulo}`;
+
+        const url = window.location.href;
+
+        try {
+            if (navigator.share) {
+                await navigator.share({
+                    title: titulo,
+                    text: texto,
+                    url: url
+                });
+
+                return;
+            }
+
+            await copiarTexto(url);
+
+            mostrarAvisoCompartilhamento(
+                botao,
+                "Link copiado!"
+            );
+        } catch (erro) {
+            if (erro.name === "AbortError") {
+                return;
+            }
+
+            console.error(
+                "Não foi possível compartilhar:",
+                erro
+            );
+
+            mostrarAvisoCompartilhamento(
+                botao,
+                "Não foi possível copiar"
+            );
+        }
+    });
+}
+
+async function copiarTexto(texto) {
+    if (
+        navigator.clipboard &&
+        window.isSecureContext
+    ) {
+        await navigator.clipboard.writeText(texto);
+        return;
+    }
+
+    const campoTemporario =
+        document.createElement("textarea");
+
+    campoTemporario.value = texto;
+    campoTemporario.style.position = "fixed";
+    campoTemporario.style.left = "-9999px";
+    campoTemporario.style.top = "0";
+
+    document.body.appendChild(campoTemporario);
+
+    campoTemporario.focus();
+    campoTemporario.select();
+
+    const copiado = document.execCommand("copy");
+
+    campoTemporario.remove();
+
+    if (!copiado) {
+        throw new Error(
+            "O navegador não permitiu copiar o link."
+        );
+    }
+}
+
+function mostrarAvisoCompartilhamento(
+    botao,
+    mensagem
+) {
+    const conteudoOriginal = botao.innerHTML;
+
+    botao.innerHTML = `
+        <i class="fa-solid fa-check"></i>
+        ${mensagem}
+    `;
+
+    botao.disabled = true;
+
+    setTimeout(() => {
+        botao.innerHTML = conteudoOriginal;
+        botao.disabled = false;
+    }, 2000);
 }
 
 function renderizarProdutosRelacionados(
@@ -347,10 +475,15 @@ function renderizarProdutosRelacionados(
         "produtosRelacionados"
     );
 
+    if (!secao || !container) {
+        return;
+    }
+
     container.innerHTML = "";
 
     relacionados.forEach(produto => {
         const codigo = escaparHtml(produto.codigo);
+
         const descricao = escaparHtml(
             produto.descricao || "Produto"
         );

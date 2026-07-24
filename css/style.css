@@ -1530,5 +1530,46 @@ footer{
     }
 }
 /* ==========================================================
+   BOTÃO COMPARTILHAR PRODUTO
+==========================================================*/
+
+.product-detail-share {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 9px;
+    min-height: 48px;
+    padding: 0 20px;
+    border: 1px solid #1677ff;
+    border-radius: 9px;
+    background: #ffffff;
+    color: #1677ff;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all .25s ease;
+}
+
+.product-detail-share:hover {
+    background: #1677ff;
+    color: #ffffff;
+}
+
+.product-detail-share:disabled {
+    opacity: .75;
+    cursor: default;
+}
+
+@media (max-width:600px){
+
+    .product-detail-share{
+
+        width:100%;
+
+    }
+
+}
+/* ==========================================================
    FIM DO ARQUIVO
 ==========================================================*/
