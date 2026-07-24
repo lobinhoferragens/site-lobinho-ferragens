@@ -1229,6 +1229,66 @@ footer{
     height:100% !important;
     object-fit:contain !important;
 }
+.pagination-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 35px;
+    padding-bottom: 40px;
+}
+
+.pagination-button {
+    min-width: 42px;
+    height: 42px;
+    padding: 0 14px;
+    border: 1px solid #d8dde5;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #1677ff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.pagination-button:hover:not(:disabled) {
+    background: #1677ff;
+    color: #ffffff;
+    border-color: #1677ff;
+}
+
+.pagination-button.active {
+    background: #1677ff;
+    color: #ffffff;
+    border-color: #1677ff;
+}
+
+.pagination-button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.pagination-info {
+    padding: 0 8px;
+    color: #667085;
+    font-size: 14px;
+}
+
+@media (max-width: 600px) {
+    .pagination-button {
+        min-width: 38px;
+        height: 38px;
+        padding: 0 10px;
+    }
+
+    .pagination-info {
+        width: 100%;
+        text-align: center;
+        order: 3;
+    }
+}
 /* ==========================================================
    FIM DO ARQUIVO
 ==========================================================*/

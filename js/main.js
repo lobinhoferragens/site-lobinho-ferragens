@@ -158,6 +158,11 @@ const pesquisa = document.getElementById("pesquisa");
 let produtos = [];
 let produtosFiltrados = [];
 
+let paginaAtual = 1;
+const produtosPorPagina = 12;
+
+const paginacaoContainer = document.getElementById("paginacao");
+
 async function carregarProdutos() {
     try {
         const resposta = await fetch("produtos.json");
@@ -196,10 +201,20 @@ function renderizarProdutos(lista) {
                 <h3>Nenhum produto encontrado.</h3>
             </div>
         `;
+
+        if (paginacaoContainer) {
+            paginacaoContainer.innerHTML = "";
+        }
+
         return;
     }
 
-    lista.forEach(produto => {
+    const inicio = (paginaAtual - 1) * produtosPorPagina;
+    const fim = inicio + produtosPorPagina;
+
+    const produtosDaPagina = lista.slice(inicio, fim);
+
+    produtosDaPagina.forEach(produto => {
         const codigo = escaparHtml(produto.codigo);
         const descricao = escaparHtml(produto.descricao || "Produto");
         const imagem = obterImagemProduto(produto);
@@ -255,6 +270,96 @@ function renderizarProdutos(lista) {
 
         produtosContainer.appendChild(card);
     });
+
+    criarPaginacao(lista.length);
+}
+function criarPaginacao(totalProdutos) {
+    if (!paginacaoContainer) {
+        return;
+    }
+
+    paginacaoContainer.innerHTML = "";
+
+    const totalPaginas = Math.ceil(
+        totalProdutos / produtosPorPagina
+    );
+
+    if (totalPaginas <= 1) {
+        return;
+    }
+
+    const botaoAnterior = document.createElement("button");
+    botaoAnterior.textContent = "Anterior";
+    botaoAnterior.className = "pagination-button";
+    botaoAnterior.disabled = paginaAtual === 1;
+
+    botaoAnterior.addEventListener("click", () => {
+        if (paginaAtual > 1) {
+            paginaAtual--;
+            renderizarProdutos(produtosFiltrados);
+            voltarAoCatalogo();
+        }
+    });
+
+    paginacaoContainer.appendChild(botaoAnterior);
+
+    const inicioPagina = Math.max(1, paginaAtual - 2);
+    const fimPagina = Math.min(totalPaginas, paginaAtual + 2);
+
+    for (
+        let numeroPagina = inicioPagina;
+        numeroPagina <= fimPagina;
+        numeroPagina++
+    ) {
+        const botaoPagina = document.createElement("button");
+
+        botaoPagina.textContent = numeroPagina;
+        botaoPagina.className = "pagination-button";
+
+        if (numeroPagina === paginaAtual) {
+            botaoPagina.classList.add("active");
+        }
+
+        botaoPagina.addEventListener("click", () => {
+            paginaAtual = numeroPagina;
+            renderizarProdutos(produtosFiltrados);
+            voltarAoCatalogo();
+        });
+
+        paginacaoContainer.appendChild(botaoPagina);
+    }
+
+    const informacao = document.createElement("span");
+    informacao.className = "pagination-info";
+    informacao.textContent = `${paginaAtual} de ${totalPaginas}`;
+
+    paginacaoContainer.appendChild(informacao);
+
+    const botaoProximo = document.createElement("button");
+    botaoProximo.textContent = "Próxima";
+    botaoProximo.className = "pagination-button";
+    botaoProximo.disabled = paginaAtual === totalPaginas;
+
+    botaoProximo.addEventListener("click", () => {
+        if (paginaAtual < totalPaginas) {
+            paginaAtual++;
+            renderizarProdutos(produtosFiltrados);
+            voltarAoCatalogo();
+        }
+    });
+
+    paginacaoContainer.appendChild(botaoProximo);
+}
+
+function voltarAoCatalogo() {
+    const catalogo = document.getElementById("catalogo");
+
+    if (catalogo) {
+        catalogo.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    }
 }
 
 if (pesquisa) {
@@ -267,7 +372,7 @@ if (pesquisa) {
 
             return descricao.includes(texto) || codigo.includes(texto);
         });
-
+        paginaAtual = 1;
         renderizarProdutos(produtosFiltrados);
     });
 }
