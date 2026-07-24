@@ -1571,5 +1571,65 @@ footer{
 
 }
 /* ==========================================================
+   FILTROS DO CATÁLOGO
+========================================================== */
+
+.category-filters {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 24px 0 14px;
+    padding-bottom: 8px;
+    overflow-x: auto;
+    scrollbar-width: thin;
+}
+
+.category-filter {
+    flex: 0 0 auto;
+    min-height: 42px;
+    padding: 0 17px;
+    border: 1px solid #d0d5dd;
+    border-radius: 999px;
+    background: #ffffff;
+    color: #344054;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.category-filter:hover {
+    border-color: #1677ff;
+    color: #1677ff;
+}
+
+.category-filter.active {
+    border-color: #1677ff;
+    background: #1677ff;
+    color: #ffffff;
+    box-shadow: 0 6px 16px rgba(22, 119, 255, 0.2);
+}
+
+.catalog-result {
+    min-height: 24px;
+    margin-bottom: 20px;
+    color: #667085;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+@media (max-width: 600px) {
+    .category-filters {
+        margin-top: 18px;
+    }
+
+    .category-filter {
+        min-height: 39px;
+        padding: 0 14px;
+        font-size: 13px;
+    }
+}
+/* ==========================================================
    FIM DO ARQUIVO
 ==========================================================*/

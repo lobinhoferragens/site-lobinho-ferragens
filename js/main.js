@@ -155,11 +155,21 @@ function escaparHtml(valor = "") {
 const produtosContainer = document.getElementById("produtos");
 const pesquisa = document.getElementById("pesquisa");
 
+const filtrosCategorias = document.getElementById(
+    "filtrosCategorias"
+);
+
+const resultadoCatalogo = document.getElementById(
+    "resultadoCatalogo"
+);
+
 let produtos = [];
 let produtosFiltrados = [];
 
 let paginaAtual = 1;
 const produtosPorPagina = 12;
+
+let categoriaSelecionada = "Todos";
 
 const paginacaoContainer = document.getElementById("paginacao");
 
@@ -187,6 +197,37 @@ async function carregarProdutos() {
         }
     }
 }
+function aplicarFiltros() {
+    const termoPesquisa = normalizarTexto(
+        pesquisa ? pesquisa.value.trim() : ""
+    );
+
+    produtosFiltrados = produtos.filter(produto => {
+        const descricao = normalizarTexto(
+            produto.descricao || ""
+        );
+
+        const codigo = normalizarTexto(
+            produto.codigo || ""
+        );
+
+        const categoria = identificarCategoria(produto);
+
+        const correspondePesquisa =
+            descricao.includes(termoPesquisa) ||
+            codigo.includes(termoPesquisa);
+
+        const correspondeCategoria =
+            categoriaSelecionada === "Todos" ||
+            categoria === categoriaSelecionada;
+
+        return correspondePesquisa && correspondeCategoria;
+    });
+
+    paginaAtual = 1;
+
+    renderizarProdutos(produtosFiltrados);
+}
 
 function renderizarProdutos(lista) {
     if (!produtosContainer) {
@@ -194,7 +235,16 @@ function renderizarProdutos(lista) {
     }
 
     produtosContainer.innerHTML = "";
+if (resultadoCatalogo) {
 
+    const quantidade = lista.length;
+
+    resultadoCatalogo.textContent =
+        quantidade === 1
+            ? "1 produto encontrado"
+            : `${quantidade.toLocaleString("pt-BR")} produtos encontrados`;
+
+}
     if (lista.length === 0) {
         produtosContainer.innerHTML = `
             <div style="text-align:center;padding:30px;">
@@ -363,18 +413,31 @@ function voltarAoCatalogo() {
 }
 
 if (pesquisa) {
-    pesquisa.addEventListener("input", () => {
-        const texto = normalizarTexto(pesquisa.value.trim());
+    pesquisa.addEventListener(
+        "input",
+        aplicarFiltros
+    );
+}
+if (filtrosCategorias) {
 
-        produtosFiltrados = produtos.filter(produto => {
-            const descricao = normalizarTexto(produto.descricao);
-            const codigo = String(produto.codigo || "").toLowerCase();
+    filtrosCategorias.addEventListener("click", evento => {
 
-            return descricao.includes(texto) || codigo.includes(texto);
-        });
-        paginaAtual = 1;
-        renderizarProdutos(produtosFiltrados);
+        const botao = evento.target.closest(".category-filter");
+
+        if (!botao) return;
+
+        categoriaSelecionada = botao.dataset.categoria;
+
+        filtrosCategorias
+            .querySelectorAll(".category-filter")
+            .forEach(btn => btn.classList.remove("active"));
+
+        botao.classList.add("active");
+
+        aplicarFiltros();
+
     });
+
 }
 
 carregarProdutos();
