@@ -15,7 +15,7 @@ async function carregarProdutos() {
         produtos = await resposta.json();
 
         console.log(produtos);
-        
+
         produtosFiltrados = produtos;
 
         renderizarProdutos(produtosFiltrados);
@@ -49,8 +49,7 @@ function renderizarProdutos(lista) {
     lista.forEach(produto => {
 
         const card = document.createElement("div");
-        card.className = "col-lg-4 col-md-6";
-
+        card.className = "produto-item";
         card.innerHTML = `
             <div class="product-card">
 

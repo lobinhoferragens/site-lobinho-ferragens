@@ -1185,7 +1185,50 @@ footer{
     }
 
 }
+.produto-item{
+    width:100%;
+}
 
+.products-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+    gap:30px;
+}
+
+.product-card{
+    width:100%;
+}
+/* ===== TESTE DE EXIBIÇÃO DOS PRODUTOS ===== */
+
+#produtos{
+    display:grid !important;
+    grid-template-columns:repeat(auto-fill,minmax(320px,1fr)) !important;
+    gap:30px !important;
+    width:100% !important;
+}
+
+#produtos > div{
+    width:100% !important;
+}
+
+.product-card{
+    display:flex !important;
+    flex-direction:column !important;
+    width:100% !important;
+    min-height:420px !important;
+    background:#fff !important;
+    border:1px solid #ddd !important;
+}
+
+.product-image{
+    height:250px !important;
+}
+
+.product-image img{
+    width:100% !important;
+    height:100% !important;
+    object-fit:contain !important;
+}
 /* ==========================================================
    FIM DO ARQUIVO
 ==========================================================*/
