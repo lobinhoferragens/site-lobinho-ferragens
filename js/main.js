@@ -1,3 +1,38 @@
+function criarImagemPadrao(texto = "Sem imagem") {
+    const textoSeguro = String(texto)
+        .slice(0, 25)
+        .replace(/[<>&"'`]/g, "");
+
+    const svg = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="300" height="300">
+            <rect width="100%" height="100%" fill="#f2f4f7"/>
+
+            <text
+                x="50%"
+                y="47%"
+                text-anchor="middle"
+                dominant-baseline="middle"
+                font-family="Arial, sans-serif"
+                font-size="18"
+                fill="#6b7280">
+                Produto sem imagem
+            </text>
+
+            <text
+                x="50%"
+                y="57%"
+                text-anchor="middle"
+                dominant-baseline="middle"
+                font-family="Arial, sans-serif"
+                font-size="13"
+                fill="#9ca3af">
+                ${textoSeguro}
+            </text>
+        </svg>
+    `;
+
+    return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+}
 const produtosContainer = document.getElementById("produtos");
 const pesquisa = document.getElementById("pesquisa");
 
@@ -56,9 +91,10 @@ function renderizarProdutos(lista) {
                 <div class="product-image">
 
                     <img
-                        src="${produto.img || 'https://via.placeholder.com/300x300?text=Sem+Imagem'}"
+                        src="${produto.img || criarImagemPadrao(produto.descricao)}"
                         alt="${produto.descricao}"
-                        onerror="this.src='https://via.placeholder.com/300x300?text=Sem+Imagem'">
+                        loading="lazy">
+                        onerror="this.onerror=null; this.src=criarImagemPadrao('Sem imagem');"
 
                 </div>
 
